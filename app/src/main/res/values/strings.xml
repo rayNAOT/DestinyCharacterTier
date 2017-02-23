@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Destiny Character Tier</string>
+    <string name="tv_helmet">Helmet</string>
+    <string name="tv_gauntlet">Gauntlet</string>
+    <string name="tv_chest">Chest</string>
+    <string name="tv_legs">Legs</string>
+    <string name="tv_class_item">Class Item</string>
+    <string name="tv_artifact">Artifact</string>
+    <string name="tv_ghost">Ghost</string>
+    <string name="tv_total">Total</string>
+    <string name="tv_tier">Tier</string>
+    <string name="et_hint">0</string>
 </resources>
