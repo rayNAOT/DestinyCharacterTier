@@ -12,601 +12,661 @@
     android:paddingTop="0dp"
     tools:context="com.example.raymond.destinycharactertier.TierActivity">
 
-    <TableRow
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:weightSum="4">
 
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/btn_tier"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical|center_horizontal|center"
-                android:text="SHOW TIER" />
-
-        </TableRow>
-
-        <TableRow
+        <Button
+            android:id="@+id/btn_tier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal|center"
+            android:text="SHOW TIER" />
 
-            <EditText
-                android:id="@+id/et_class_name"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:hint="Enter class name"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:textColor="#ffffff"
-                android:textColorHint="#ffffff" />
-        </TableRow>
-
-        <TableRow
+        <EditText
+            android:id="@+id/et_class_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:hint="Enter class name"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="#ffffff"
+            android:textColorHint="#cccccc" />
 
-            <Button
-                android:id="@+id/btn_save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SAVE" />
+    </LinearLayout>
 
-        </TableRow>
-
-    </TableRow>
-
-    <TableLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_1"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:gravity="center"
-                android:text=""
-                android:textSize="42dp" />
-
-            <TextView
-                android:id="@+id/tv_intellect"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:rotation="270"
-                android:text="Intellect"
-                android:textColor="#ffe100" />
-
-            <TextView
-                android:id="@+id/tv_discipline"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:rotation="270"
-                android:text="Discipline"
-                android:textColor="#ffe100" />
-
-            <TextView
-                android:id="@+id/tv_strength"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:rotation="270"
-                android:text="Strength"
-                android:textColor="#ffe100" />
-
-            <TextView
-                android:id="@+id/tv_roll"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="Roll %age"
-                android:textColor="#ffe100" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/tv_helm"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="Helmet"
-                android:textColor="#ffe100" />
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
 
-            <EditText
-                android:id="@+id/et_helm_intellect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
 
-            <EditText
-                android:id="@+id/et_helm_discipline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
+                    <TextView
+                        android:id="@+id/tv_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text=""
+                        android:textSize="28dp" />
 
-            <EditText
-                android:id="@+id/et_helm_strength"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
+                    <TextView
+                        android:id="@+id/tv_intellect"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:rotation="270"
+                        android:text="Intellect"
+                        android:textColor="#ffe100" />
 
-            <TextView
-                android:id="@+id/tv_helm_roll"
+                    <TextView
+                        android:id="@+id/tv_discipline"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:rotation="270"
+                        android:text="Discipline"
+                        android:textColor="#ffe100" />
+
+                    <TextView
+                        android:id="@+id/tv_strength"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:rotation="270"
+                        android:text="Strength"
+                        android:textColor="#ffe100" />
+
+                    <TextView
+                        android:id="@+id/tv_roll"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Roll %age"
+                        android:textColor="#ffe100" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <TextView
+                        android:id="@+id/tv_helm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/tv_helmet"
+                        android:textColor="#ffe100" />
+
+                    <EditText
+                        android:id="@+id/et_helm_intellect"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@string/et_hint"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/et_helm_discipline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@string/et_hint"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/et_helm_strength"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@string/et_hint"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_helm_roll"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <TextView
+                        android:id="@+id/tv_gauntlet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/tv_gauntlet"
+                        android:textColor="#ffe100" />
+
+                    <EditText
+                        android:id="@+id/et_gauntlet_intellect"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@string/et_hint"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/et_gauntlet_discipline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@string/et_hint"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/et_gauntlet_strength"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@string/et_hint"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_gauntlet_roll"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <TextView
+                        android:id="@+id/tv_chest"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/tv_chest"
+                        android:textColor="#ffe100" />
+
+                    <EditText
+                        android:id="@+id/et_chest_intellect"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@string/et_hint"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/et_chest_discipline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@string/et_hint"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/et_chest_strength"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@string/et_hint"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_chest_roll"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <TextView
+                        android:id="@+id/tv_legs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/tv_legs"
+                        android:textColor="#ffe100" />
+
+                    <EditText
+                        android:id="@+id/et_legs_intellect"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@string/et_hint"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/et_legs_discipline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@string/et_hint"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/et_legs_strength"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@string/et_hint"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_legs_roll"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <TextView
+                        android:id="@+id/tv_class"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/tv_class_item"
+                        android:textColor="#ffe100" />
+
+                    <EditText
+                        android:id="@+id/et_class_intellect"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@string/et_hint"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/et_class_discipline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@string/et_hint"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/et_class_strength"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@string/et_hint"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_class_roll"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <TextView
+                        android:id="@+id/tv_artifact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/tv_artifact"
+                        android:textColor="#ffe100" />
+
+                    <EditText
+                        android:id="@+id/et_artifact_intellect"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@string/et_hint"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/et_artifact_discipline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@string/et_hint"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/et_artifact_strength"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@string/et_hint"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_artifact_roll"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <TextView
+                        android:id="@+id/tv_ghost"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/tv_ghost"
+                        android:textColor="#ffe100" />
+
+                    <EditText
+                        android:id="@+id/et_ghost_intellect"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@string/et_hint"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/et_ghost_discipline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@string/et_hint"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/et_ghost_strength"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:text="@string/et_hint"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_ghost_roll"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:weightSum="5">
+
+                    <TextView
+                        android:id="@+id/tv_total"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/tv_total"
+                        android:textColor="#ffe100" />
+
+                    <TextView
+                        android:id="@+id/tv_total_intellect"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#ffffff" />
+
+                    <TextView
+                        android:id="@+id/tv_total_discipline"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#ffffff" />
+
+                    <TextView
+                        android:id="@+id/tv_total_strength"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#ffffff" />
+
+                    <TextView
+                        android:id="@+id/tv_tier2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:weightSum="5">
+
+                    <TextView
+                        android:id="@+id/tv_tier"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/tv_tier"
+                        android:textColor="#ffe100" />
+
+                    <TextView
+                        android:id="@+id/tv_tier_intellect"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#ffffff" />
+
+                    <TextView
+                        android:id="@+id/tv_tier_discipline"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#ffffff" />
+
+                    <TextView
+                        android:id="@+id/tv_tier_strength"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#ffffff" />
+
+                    <TextView
+                        android:id="@+id/tv_tier3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/tv_gauntlet"
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="Gauntlet"
-                android:textColor="#ffe100" />
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:padding="15dp"
+                android:weightSum="4">
 
-            <EditText
-                android:id="@+id/et_gauntlet_intellect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
+                <Button
+                    android:id="@+id/btn_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusable="false"
+                    android:text="INFO" />
 
-            <EditText
-                android:id="@+id/et_gauntlet_discipline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
+                <Button
+                    android:id="@+id/btn_save"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="SAVE" />
 
-            <EditText
-                android:id="@+id/et_gauntlet_strength"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
+                <Button
+                    android:id="@+id/btn_database"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusable="false"
+                    android:text="DATABASE"
+                    android:textSize="13sp" />
 
-            <TextView
-                android:id="@+id/tv_gauntlet_roll"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center" />
+                <Button
+                    android:id="@+id/btn_about"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusable="false"
+                    android:text="ABOUT" />
 
-        </TableRow>
+            </LinearLayout>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
+        </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_chest"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="Chest"
-                android:textColor="#ffe100" />
+    </ScrollView>
 
-            <EditText
-                android:id="@+id/et_chest_intellect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
-
-            <EditText
-                android:id="@+id/et_chest_discipline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
-
-            <EditText
-                android:id="@+id/et_chest_strength"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
-
-            <TextView
-                android:id="@+id/tv_chest_roll"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/tv_legs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="Legs"
-                android:textColor="#ffe100" />
-
-            <EditText
-                android:id="@+id/et_legs_intellect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
-
-            <EditText
-                android:id="@+id/et_legs_discipline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
-
-            <EditText
-                android:id="@+id/et_legs_strength"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
-
-            <TextView
-                android:id="@+id/tv_legs_roll"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/tv_class"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="Class Item"
-                android:textColor="#ffe100" />
-
-            <EditText
-                android:id="@+id/et_class_intellect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
-
-            <EditText
-                android:id="@+id/et_class_discipline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
-
-            <EditText
-                android:id="@+id/et_class_strength"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
-
-            <TextView
-                android:id="@+id/tv_class_roll"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/tv_artifact"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="Artifact"
-                android:textColor="#ffe100" />
-
-            <EditText
-                android:id="@+id/et_artifact_intellect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
-
-            <EditText
-                android:id="@+id/et_artifact_discipline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
-
-            <EditText
-                android:id="@+id/et_artifact_strength"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
-
-            <TextView
-                android:id="@+id/tv_artifact_roll"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/tv_ghost"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="Ghost"
-                android:textColor="#ffe100" />
-
-            <EditText
-                android:id="@+id/et_ghost_intellect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
-
-            <EditText
-                android:id="@+id/et_ghost_discipline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
-
-            <EditText
-                android:id="@+id/et_ghost_strength"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0"
-                android:textColor="#ffffff"
-                android:textSize="14dp" />
-
-            <TextView
-                android:id="@+id/tv_ghost_roll"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/tv_total"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="Total"
-                android:textColor="#ffe100" />
-
-            <TextView
-                android:id="@+id/tv_total_intellect"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="#ffffff" />
-
-            <TextView
-                android:id="@+id/tv_total_discipline"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="#ffffff" />
-
-            <TextView
-                android:id="@+id/tv_total_strength"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="#ffffff" />
-
-            <TextView
-                android:id="@+id/tv_tier2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text=""
-                android:textSize="8dp" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/tv_tier"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="Tier"
-                android:textColor="#ffe100" />
-
-            <TextView
-                android:id="@+id/tv_tier_intellect"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="#ffffff" />
-
-            <TextView
-                android:id="@+id/tv_tier_discipline"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="#ffffff" />
-
-            <TextView
-                android:id="@+id/tv_tier_strength"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="#ffffff" />
-
-            <TextView
-                android:id="@+id/tv_tier3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text=""
-                android:textSize="8dp" />
-        </TableRow>
-
-
-    </TableLayout>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center">
-
-        <Button
-            android:id="@+id/btn_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:text="INFO" />
-
-        <Button
-            android:id="@+id/btn_database"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:text="DATABASE" />
-
-        <Button
-            android:id="@+id/btn_about"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:text="ABOUT" />
-
-    </TableRow>
 
 </LinearLayout>

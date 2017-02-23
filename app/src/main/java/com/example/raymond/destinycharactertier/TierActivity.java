@@ -140,131 +140,47 @@ public class TierActivity extends AppCompatActivity {
         AddData();
         viewAll();
 
-        et_helm_intellect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_helm_intellect.selectAll();
-            }
-        });
+        et_helm_intellect.setSelectAllOnFocus(true);
 
-        et_helm_discipline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_helm_discipline.selectAll();
-            }
-        });
+        et_helm_discipline.setSelectAllOnFocus(true);
 
-        et_helm_strength.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_helm_strength.selectAll();
-            }
-        });
+        et_helm_strength.setSelectAllOnFocus(true);
 
-        et_gauntlet_intellect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_gauntlet_intellect.selectAll();
-            }
-        });
+        et_gauntlet_intellect.setSelectAllOnFocus(true);
 
-        et_gauntlet_discipline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_gauntlet_discipline.selectAll();
-            }
-        });
+        et_gauntlet_discipline.setSelectAllOnFocus(true);
 
-        et_gauntlet_strength.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_gauntlet_strength.selectAll();
-            }
-        });
+        et_gauntlet_strength.setSelectAllOnFocus(true);
 
-        et_legs_intellect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_legs_intellect.selectAll();
-            }
-        });
+        et_chest_intellect.setSelectAllOnFocus(true);
 
-        et_legs_discipline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_legs_discipline.selectAll();
-            }
-        });
+        et_chest_discipline.setSelectAllOnFocus(true);
 
-        et_legs_strength.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_legs_strength.selectAll();
-            }
-        });
+        et_chest_strength.setSelectAllOnFocus(true);
 
-        et_class_intellect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_class_intellect.selectAll();
-            }
-        });
+        et_legs_intellect.setSelectAllOnFocus(true);
 
-        et_class_discipline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_class_discipline.selectAll();
-            }
-        });
+        et_legs_discipline.setSelectAllOnFocus(true);
 
-        et_class_strength.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_class_strength.selectAll();
-            }
-        });
+        et_legs_strength.setSelectAllOnFocus(true);
 
-        et_artifact_intellect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_artifact_intellect.selectAll();
-            }
-        });
+        et_class_intellect.setSelectAllOnFocus(true);
 
-        et_artifact_discipline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_artifact_discipline.selectAll();
-            }
-        });
+        et_class_discipline.setSelectAllOnFocus(true);
 
-        et_artifact_strength.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_artifact_strength.selectAll();
-            }
-        });
+        et_class_strength.setSelectAllOnFocus(true);
 
-        et_ghost_intellect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_ghost_intellect.selectAll();
-            }
-        });
+        et_artifact_intellect.setSelectAllOnFocus(true);
 
-        et_ghost_discipline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_ghost_discipline.selectAll();
-            }
-        });
+        et_artifact_discipline.setSelectAllOnFocus(true);
 
-        et_ghost_strength.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                et_ghost_strength.selectAll();
-            }
-        });
+        et_artifact_strength.setSelectAllOnFocus(true);
+
+        et_ghost_intellect.setSelectAllOnFocus(true);
+
+        et_ghost_discipline.setSelectAllOnFocus(true);
+
+        et_ghost_strength.setSelectAllOnFocus(true);
 
         et_helm_intellect.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -278,7 +194,7 @@ public class TierActivity extends AppCompatActivity {
                     helm_strength = Integer.parseInt(et_helm_strength.getText().toString());
 
                     result = (helm_intellect + helm_discipline + helm_strength) / HELM_MAX * 100;
-                    rounded = (double)Math.round(result * 10) / 10;
+                    rounded = (double) Math.round(result * 10) / 10;
                     tv_helm_roll.setText("" + rounded + " %");
 
                     if (rounded >= 100) {
@@ -293,7 +209,6 @@ public class TierActivity extends AppCompatActivity {
                         tv_helm_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
                     }
                 }
-
             }
         });
 
