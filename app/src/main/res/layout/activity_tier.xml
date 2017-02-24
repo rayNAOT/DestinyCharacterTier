@@ -25,7 +25,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical|center_horizontal|center"
-            android:text="SHOW TIER" />
+            android:text="SHOW TIER"
+            android:textColor="#ffffff"
+            android:background="@color/customTranslucent" />
 
         <EditText
             android:id="@+id/et_class_name"
@@ -636,12 +638,16 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusable="false"
+                    android:textColor="#ffffff"
+                    android:background="@color/customTranslucent"
                     android:text="INFO" />
 
                 <Button
                     android:id="@+id/btn_save"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:background="@color/customTranslucent"
                     android:layout_weight="1"
                     android:text="SAVE" />
 
@@ -649,6 +655,8 @@
                     android:id="@+id/btn_database"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:background="@color/customTranslucent"
                     android:layout_weight="1"
                     android:focusable="false"
                     android:text="DATABASE"
@@ -658,6 +666,8 @@
                     android:id="@+id/btn_about"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:background="@color/customTranslucent"
                     android:layout_weight="1"
                     android:focusable="false"
                     android:text="ABOUT" />
