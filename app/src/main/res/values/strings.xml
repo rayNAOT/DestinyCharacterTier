@@ -10,4 +10,8 @@
     <string name="tv_total">Total</string>
     <string name="tv_tier">Tier</string>
     <string name="et_hint">0</string>
+    <string name="tv_intellect">Intellect</string>
+    <string name="tv_discipline">Discipline</string>
+    <string name="tv_strength">Strength</string>
+    <string name="tv_rollPercentage">Roll %age</string>
 </resources>

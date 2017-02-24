@@ -18,7 +18,15 @@ import android.widget.Toast;
 import static android.R.attr.onClick;
 
 public class TierActivity extends AppCompatActivity {
-
+/*
+* TODO
+* Exception handling if user does not enter number in editText field - app currently closes
+* Add bonus or upgrade switch and associated calculations
+* Add buttons to INFO and ABOUT pages to direct users to other activities
+* Update database to display data on separate activity with compare function
+* Limit size of numbers that can be entered in editText fields
+* Limit length of text length for class name
+* */
 
     DatabaseHandler myDb;
 
