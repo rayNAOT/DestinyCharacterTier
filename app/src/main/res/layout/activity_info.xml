@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:padding="5dp"
-                android:text="HELMET" />
+                android:text="@string/tv_helmet" />
 
             <TextView
                 android:id="@+id/tv_info9"
@@ -156,7 +156,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:padding="5dp"
-                android:text="GAUNTLET" />
+                android:text="@string/tv_gauntlet" />
 
             <TextView
                 android:id="@+id/tv_info14"
@@ -206,7 +206,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:padding="5dp"
-                android:text="CHEST" />
+                android:text="@string/tv_chest" />
 
             <TextView
                 android:id="@+id/tv_info19"
@@ -256,7 +256,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:padding="5dp"
-                android:text="LEGS" />
+                android:text="@string/tv_legs" />
 
             <TextView
                 android:id="@+id/tv_info24"
@@ -306,7 +306,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:padding="5dp"
-                android:text="CLASS" />
+                android:text="@string/tv_class_item" />
 
             <TextView
                 android:id="@+id/tv_info29"
@@ -356,7 +356,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:padding="5dp"
-                android:text="ARTIFACT" />
+                android:text="@string/tv_artifact" />
 
             <TextView
                 android:id="@+id/tv_info34"
@@ -406,7 +406,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:padding="5dp"
-                android:text="GHOST" />
+                android:text="@string/tv_ghost" />
 
             <TextView
                 android:id="@+id/tv_info39"
@@ -493,6 +493,4 @@
         </TableRow>
 
     </TableLayout>
-
-
 </RelativeLayout>
