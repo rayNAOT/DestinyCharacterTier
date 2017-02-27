@@ -3,19 +3,23 @@ package com.example.raymond.destinycharactertier;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
-//import android.icu.text.DecimalFormat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.LoginFilter;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static android.R.attr.onClick;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 public class TierActivity extends AppCompatActivity {
 /*
@@ -26,6 +30,7 @@ public class TierActivity extends AppCompatActivity {
 * Update database to display data on separate activity with compare function
 * Limit size of numbers that can be entered in editText fields
 * Limit length of text length for class name
+* Prevent users from saving data if no data is entered
 * */
 
     DatabaseHandler myDb;
