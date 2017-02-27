@@ -146,7 +146,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:textColorLink="@android:color/holo_green_light"
+                        android:switchTextAppearance="@style/TextAppearance.AppCompat" />
 
                     <EditText
                         android:id="@+id/et_helm_intellect"
@@ -390,7 +392,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:weightSum="5">
+                    android:weightSum="6">
 
                     <TextView
                         android:id="@+id/tv_class"
@@ -400,6 +402,13 @@
                         android:gravity="center_vertical"
                         android:text="@string/tv_class_item"
                         android:textColor="#ffe100" />
+
+                    <Switch
+                        android:id="@+id/switch_classItem"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center" />
 
                     <EditText
                         android:id="@+id/et_class_intellect"
@@ -448,7 +457,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:weightSum="5">
+                    android:weightSum="6">
 
                     <TextView
                         android:id="@+id/tv_artifact"
@@ -458,6 +467,13 @@
                         android:gravity="center_vertical"
                         android:text="@string/tv_artifact"
                         android:textColor="#ffe100" />
+
+                    <Switch
+                        android:id="@+id/switch_artifact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center" />
 
                     <EditText
                         android:id="@+id/et_artifact_intellect"
@@ -506,7 +522,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:weightSum="5">
+                    android:weightSum="6">
 
                     <TextView
                         android:id="@+id/tv_ghost"
@@ -516,6 +532,13 @@
                         android:gravity="center_vertical"
                         android:text="@string/tv_ghost"
                         android:textColor="#ffe100" />
+
+                    <Switch
+                        android:id="@+id/switch_ghost"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center" />
 
                     <EditText
                         android:id="@+id/et_ghost_intellect"
