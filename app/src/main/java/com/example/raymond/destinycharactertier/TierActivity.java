@@ -3,7 +3,6 @@ package com.example.raymond.destinycharactertier;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
-//import android.icu.text.DecimalFormat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,14 +10,24 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static android.R.attr.onClick;
-
 public class TierActivity extends AppCompatActivity {
-
+/*
+* TODO
+* Exception handling if user does not enter number in editText field - app currently closes
+* Add bonus or upgrade switch and associated calculations
+* Add buttons to INFO and ABOUT pages to direct users to other activities
+* Update database to display data on separate activity with compare function
+* Limit size of numbers that can be entered in editText fields
+* Limit length of text length for class name
+* Prevent users from saving data if no data is entered
+* Issue with Ghost setOnEditorActionListener, function not changing focus to next editText element. Causing a return instead.
+* */
 
     DatabaseHandler myDb;
 
@@ -49,6 +58,8 @@ public class TierActivity extends AppCompatActivity {
             ghost_intellect, ghost_discipline, ghost_strength,
             intelTotal, disciplineTotal, strengthTotal,
             tierIntelTotal, tierDisciplineTotal, tierStrengthTotal, characterTier;
+
+    Switch switch_helm, switch_gauntlet, switch_chest, switch_legs, switch_classItem, switch_artifact, switch_ghost;
 
     final int HELM_MAX = 46 + 46;
     final int GAUNTLET_MAX = 41 + 41;
@@ -137,6 +148,14 @@ public class TierActivity extends AppCompatActivity {
 
         tv_1 = (TextView) findViewById(R.id.tv_1);
 
+        switch_helm = (Switch) findViewById(R.id.switch_helm);
+        switch_gauntlet = (Switch) findViewById(R.id.switch_gauntlet);
+        switch_chest = (Switch) findViewById(R.id.switch_chest);
+        switch_legs = (Switch) findViewById(R.id.switch_legs);
+        switch_classItem = (Switch) findViewById(R.id.switch_classItem);
+        switch_artifact = (Switch) findViewById(R.id.switch_artifact);
+        switch_ghost = (Switch) findViewById(R.id.switch_ghost);
+
         AddData();
         viewAll();
 
@@ -182,633 +201,780 @@ public class TierActivity extends AppCompatActivity {
 
         et_ghost_strength.setSelectAllOnFocus(true);
 
-        et_helm_intellect.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        et_helm_intellect.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!et_helm_intellect.getText().toString().equals("") ||
-                        !et_helm_discipline.getText().toString().equals("") ||
-                        !et_helm_strength.getText().toString().equals("")) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                helm_intellect = Integer.parseInt(et_helm_intellect.getText().toString());
+                helm_discipline = Integer.parseInt(et_helm_discipline.getText().toString());
+                helm_strength = Integer.parseInt(et_helm_strength.getText().toString());
 
-                    helm_intellect = Integer.parseInt(et_helm_intellect.getText().toString());
-                    helm_discipline = Integer.parseInt(et_helm_discipline.getText().toString());
-                    helm_strength = Integer.parseInt(et_helm_strength.getText().toString());
+                switch_helm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Toast.makeText(getApplicationContext(), "UPGRADED!", Toast.LENGTH_SHORT).show();
+                            result = (helm_intellect + helm_discipline + helm_strength - HELM_BONUS) / HELM_MAX * 100;
+                        } else {
+                            result = (helm_intellect + helm_discipline + helm_strength) / HELM_MAX * 100;
+                        }
 
-                    result = (helm_intellect + helm_discipline + helm_strength) / HELM_MAX * 100;
-                    rounded = (double) Math.round(result * 10) / 10;
-                    tv_helm_roll.setText("" + rounded + " %");
+                        rounded = (double) Math.round(result * 10) / 10;
+                        tv_helm_roll.setText("" + rounded + " %");
 
-                    if (rounded >= 100) {
-                        tv_helm_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
-                    } else if (rounded >= 95) {
-                        tv_helm_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
-                    } else if (rounded >= 90) {
-                        tv_helm_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
-                    } else if (rounded >= 85) {
-                        tv_helm_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
-                    } else {
-                        tv_helm_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        if (rounded >= 100) {
+                            tv_helm_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
+                        } else if (rounded >= 95) {
+                            tv_helm_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
+                        } else if (rounded >= 90) {
+                            tv_helm_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
+                        } else if (rounded >= 85) {
+                            tv_helm_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
+                        } else {
+                            tv_helm_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        }
                     }
-                }
+                });
+                return false;
             }
         });
 
-        et_helm_discipline.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        et_helm_discipline.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!et_helm_intellect.getText().toString().equals("") ||
-                        !et_helm_discipline.getText().toString().equals("") ||
-                        !et_helm_strength.getText().toString().equals("")) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                helm_intellect = Integer.parseInt(et_helm_intellect.getText().toString());
+                helm_discipline = Integer.parseInt(et_helm_discipline.getText().toString());
+                helm_strength = Integer.parseInt(et_helm_strength.getText().toString());
 
-                    helm_intellect = Integer.parseInt(et_helm_intellect.getText().toString());
-                    helm_discipline = Integer.parseInt(et_helm_discipline.getText().toString());
-                    helm_strength = Integer.parseInt(et_helm_strength.getText().toString());
+                switch_helm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Toast.makeText(getApplicationContext(), "UPGRADED!", Toast.LENGTH_SHORT).show();
+                            result = (helm_intellect + helm_discipline + helm_strength - HELM_BONUS) / HELM_MAX * 100;
+                        } else {
+                            result = (helm_intellect + helm_discipline + helm_strength) / HELM_MAX * 100;
+                        }
 
-                    result = (helm_intellect + helm_discipline + helm_strength) / HELM_MAX * 100;
-                    rounded = (double)Math.round(result * 10) / 10;
-                    tv_helm_roll.setText("" + rounded + " %");
+                        rounded = (double)Math.round(result * 10) / 10;
+                        tv_helm_roll.setText("" + rounded + " %");
 
-                    if (rounded >= 100) {
-                        tv_helm_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
-                    } else if (rounded >= 95) {
-                        tv_helm_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
-                    } else if (rounded >= 90) {
-                        tv_helm_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
-                    } else if (rounded >= 85) {
-                        tv_helm_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
-                    } else {
-                        tv_helm_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        if (rounded >= 100) {
+                            tv_helm_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
+                        } else if (rounded >= 95) {
+                            tv_helm_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
+                        } else if (rounded >= 90) {
+                            tv_helm_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
+                        } else if (rounded >= 85) {
+                            tv_helm_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
+                        } else {
+                            tv_helm_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        }
                     }
-                }
+                });
+                return false;
             }
         });
 
-        et_helm_strength.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        et_helm_strength.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!et_helm_intellect.getText().toString().equals("") ||
-                        !et_helm_discipline.getText().toString().equals("") ||
-                        !et_helm_strength.getText().toString().equals("")) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                helm_intellect = Integer.parseInt(et_helm_intellect.getText().toString());
+                helm_discipline = Integer.parseInt(et_helm_discipline.getText().toString());
+                helm_strength = Integer.parseInt(et_helm_strength.getText().toString());
 
-                    helm_intellect = Integer.parseInt(et_helm_intellect.getText().toString());
-                    helm_discipline = Integer.parseInt(et_helm_discipline.getText().toString());
-                    helm_strength = Integer.parseInt(et_helm_strength.getText().toString());
+                switch_helm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Toast.makeText(getApplicationContext(), "UPGRADED!", Toast.LENGTH_SHORT).show();
+                            result = (helm_intellect + helm_discipline + helm_strength - HELM_BONUS) / HELM_MAX * 100;
+                        } else {
+                            result = (helm_intellect + helm_discipline + helm_strength) / HELM_MAX * 100;
+                        }
 
-                    result = (helm_intellect + helm_discipline + helm_strength) / HELM_MAX * 100;
-                    rounded = (double)Math.round(result * 10) / 10;
-                    tv_helm_roll.setText("" + rounded + " %");
+                        rounded = (double)Math.round(result * 10) / 10;
+                        tv_helm_roll.setText("" + rounded + " %");
 
-                    if (rounded >= 100) {
-                        tv_helm_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
-                    } else if (rounded >= 95) {
-                        tv_helm_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
-                    } else if (rounded >= 90) {
-                        tv_helm_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
-                    } else if (rounded >= 85) {
-                        tv_helm_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
-                    } else {
-                        tv_helm_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        if (rounded >= 100) {
+                            tv_helm_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
+                        } else if (rounded >= 95) {
+                            tv_helm_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
+                        } else if (rounded >= 90) {
+                            tv_helm_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
+                        } else if (rounded >= 85) {
+                            tv_helm_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
+                        } else {
+                            tv_helm_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        }
                     }
-                }
+                });
+                return false;
             }
         });
 
-        et_gauntlet_intellect.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        et_gauntlet_intellect.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!et_gauntlet_intellect.getText().toString().equals("") ||
-                        !et_gauntlet_discipline.getText().toString().equals("") ||
-                        !et_gauntlet_strength.getText().toString().equals("")) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                gauntlet_intellect = Integer.parseInt(et_gauntlet_intellect.getText().toString());
+                gauntlet_discipline = Integer.parseInt(et_gauntlet_discipline.getText().toString());
+                gauntlet_strength = Integer.parseInt(et_gauntlet_strength.getText().toString());
 
-                    gauntlet_intellect = Integer.parseInt(et_gauntlet_intellect.getText().toString());
-                    gauntlet_discipline = Integer.parseInt(et_gauntlet_discipline.getText().toString());
-                    gauntlet_strength = Integer.parseInt(et_gauntlet_strength.getText().toString());
+                switch_gauntlet.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Toast.makeText(getApplicationContext(), "UPGRADED!", Toast.LENGTH_SHORT).show();
+                            result = (gauntlet_intellect + gauntlet_discipline + gauntlet_strength - GAUNTLET_BONUS) / GAUNTLET_MAX * 100;
+                        } else {
+                            result = (gauntlet_intellect + gauntlet_discipline + gauntlet_strength) / GAUNTLET_MAX * 100;
+                        }
 
-                    result = (gauntlet_intellect + gauntlet_discipline + gauntlet_strength) / GAUNTLET_MAX * 100;
-                    rounded = (double)Math.round(result * 10) / 10;
-                    tv_gauntlet_roll.setText("" + rounded + " %");
+                        rounded = (double) Math.round(result * 10) / 10;
+                        tv_gauntlet_roll.setText("" + rounded + " %");
 
-                    if (rounded >= 100) {
-                        tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
-                    } else if (rounded >= 95) {
-                        tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
-                    } else if (rounded >= 90) {
-                        tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
-                    } else if (rounded >= 85) {
-                        tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
-                    } else {
-                        tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        if (rounded >= 100) {
+                            tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
+                        } else if (rounded >= 95) {
+                            tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
+                        } else if (rounded >= 90) {
+                            tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
+                        } else if (rounded >= 85) {
+                            tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
+                        } else {
+                            tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        }
                     }
-                }
+                });
+                return false;
             }
         });
 
-        et_gauntlet_discipline.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        et_gauntlet_discipline.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!et_gauntlet_intellect.getText().toString().equals("") ||
-                        !et_gauntlet_discipline.getText().toString().equals("") ||
-                        !et_gauntlet_strength.getText().toString().equals("")) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                gauntlet_intellect = Integer.parseInt(et_gauntlet_intellect.getText().toString());
+                gauntlet_discipline = Integer.parseInt(et_gauntlet_discipline.getText().toString());
+                gauntlet_strength = Integer.parseInt(et_gauntlet_strength.getText().toString());
 
-                    gauntlet_intellect = Integer.parseInt(et_gauntlet_intellect.getText().toString());
-                    gauntlet_discipline = Integer.parseInt(et_gauntlet_discipline.getText().toString());
-                    gauntlet_strength = Integer.parseInt(et_gauntlet_strength.getText().toString());
+                switch_gauntlet.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Toast.makeText(getApplicationContext(), "UPGRADED!", Toast.LENGTH_SHORT).show();
+                            result = (gauntlet_intellect + gauntlet_discipline + gauntlet_strength - GAUNTLET_BONUS) / GAUNTLET_MAX * 100;
+                        } else {
+                            result = (gauntlet_intellect + gauntlet_discipline + gauntlet_strength) / GAUNTLET_MAX * 100;
+                        }
 
-                    result = (gauntlet_intellect + gauntlet_discipline + gauntlet_strength) / GAUNTLET_MAX * 100;
-                    rounded = (double)Math.round(result * 10) / 10;
-                    tv_gauntlet_roll.setText("" + rounded + " %");
+                        rounded = (double)Math.round(result * 10) / 10;
+                        tv_gauntlet_roll.setText("" + rounded + " %");
 
-                    if (rounded >= 100) {
-                        tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
-                    } else if (rounded >= 95) {
-                        tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
-                    } else if (rounded >= 90) {
-                        tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
-                    } else if (rounded >= 85) {
-                        tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
-                    } else {
-                        tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        if (rounded >= 100) {
+                            tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
+                        } else if (rounded >= 95) {
+                            tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
+                        } else if (rounded >= 90) {
+                            tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
+                        } else if (rounded >= 85) {
+                            tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
+                        } else {
+                            tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        }
                     }
-                }
+                });
+                return false;
             }
         });
 
-        et_gauntlet_strength.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        et_gauntlet_strength.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!et_gauntlet_intellect.getText().toString().equals("") ||
-                        !et_gauntlet_discipline.getText().toString().equals("") ||
-                        !et_gauntlet_strength.getText().toString().equals("")) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                gauntlet_intellect = Integer.parseInt(et_gauntlet_intellect.getText().toString());
+                gauntlet_discipline = Integer.parseInt(et_gauntlet_discipline.getText().toString());
+                gauntlet_strength = Integer.parseInt(et_gauntlet_strength.getText().toString());
 
-                    gauntlet_intellect = Integer.parseInt(et_gauntlet_intellect.getText().toString());
-                    gauntlet_discipline = Integer.parseInt(et_gauntlet_discipline.getText().toString());
-                    gauntlet_strength = Integer.parseInt(et_gauntlet_strength.getText().toString());
+                switch_gauntlet.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Toast.makeText(getApplicationContext(), "UPGRADED!", Toast.LENGTH_SHORT).show();
+                            result = (gauntlet_intellect + gauntlet_discipline + gauntlet_strength - GAUNTLET_BONUS) / GAUNTLET_MAX * 100;
+                        } else {
+                            result = (gauntlet_intellect + gauntlet_discipline + gauntlet_strength) / GAUNTLET_MAX * 100;
+                        }
 
-                    result = (gauntlet_intellect + gauntlet_discipline + gauntlet_strength) / GAUNTLET_MAX * 100;
-                    rounded = (double)Math.round(result * 10) / 10;
-                    tv_gauntlet_roll.setText("" + rounded + " %");
+                        rounded = (double)Math.round(result * 10) / 10;
+                        tv_gauntlet_roll.setText("" + rounded + " %");
 
-                    if (rounded >= 100) {
-                        tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
-                    } else if (rounded >= 95) {
-                        tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
-                    } else if (rounded >= 90) {
-                        tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
-                    } else if (rounded >= 85) {
-                        tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
-                    } else {
-                        tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        if (rounded >= 100) {
+                            tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
+                        } else if (rounded >= 95) {
+                            tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
+                        } else if (rounded >= 90) {
+                            tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
+                        } else if (rounded >= 85) {
+                            tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
+                        } else {
+                            tv_gauntlet_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        }
                     }
-                }
+                });
+                return false;
             }
         });
 
-        et_chest_intellect.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        et_chest_intellect.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!et_chest_intellect.getText().toString().equals("") ||
-                        !et_chest_discipline.getText().toString().equals("") ||
-                        !et_chest_strength.getText().toString().equals("")) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                chest_intellect = Integer.parseInt(et_chest_intellect.getText().toString());
+                chest_discipline = Integer.parseInt(et_chest_discipline.getText().toString());
+                chest_strength = Integer.parseInt(et_chest_strength.getText().toString());
 
-                    chest_intellect = Integer.parseInt(et_chest_intellect.getText().toString());
-                    chest_discipline = Integer.parseInt(et_chest_discipline.getText().toString());
-                    chest_strength = Integer.parseInt(et_chest_strength.getText().toString());
+                switch_chest.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Toast.makeText(getApplicationContext(), "UPGRADED!", Toast.LENGTH_SHORT).show();
+                            result = (chest_intellect + chest_discipline + chest_strength - CHEST_BONUS) / CHEST_MAX * 100;
+                        } else {
+                            result = (chest_intellect + chest_discipline + chest_strength) / CHEST_MAX * 100;
+                        }
 
-                    result = (chest_intellect + chest_discipline + chest_strength) / CHEST_MAX * 100;
-                    rounded = (double)Math.round(result * 10) / 10;
-                    tv_chest_roll.setText("" + rounded + " %");
+                        rounded = (double) Math.round(result * 10) / 10;
+                        tv_chest_roll.setText("" + rounded + " %");
 
-                    if (rounded >= 100) {
-                        tv_chest_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
-                    } else if (rounded >= 95) {
-                        tv_chest_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
-                    } else if (rounded >= 90) {
-                        tv_chest_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
-                    } else if (rounded >= 85) {
-                        tv_chest_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
-                    } else {
-                        tv_chest_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        if (rounded >= 100) {
+                            tv_chest_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
+                        } else if (rounded >= 95) {
+                            tv_chest_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
+                        } else if (rounded >= 90) {
+                            tv_chest_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
+                        } else if (rounded >= 85) {
+                            tv_chest_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
+                        } else {
+                            tv_chest_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        }
                     }
-                }
+                });
+                return false;
             }
         });
 
-        et_chest_discipline.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        et_chest_discipline.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!et_chest_intellect.getText().toString().equals("") ||
-                        !et_chest_discipline.getText().toString().equals("") ||
-                        !et_chest_strength.getText().toString().equals("")) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                chest_intellect = Integer.parseInt(et_chest_intellect.getText().toString());
+                chest_discipline = Integer.parseInt(et_chest_discipline.getText().toString());
+                chest_strength = Integer.parseInt(et_chest_strength.getText().toString());
 
-                    chest_intellect = Integer.parseInt(et_chest_intellect.getText().toString());
-                    chest_discipline = Integer.parseInt(et_chest_discipline.getText().toString());
-                    chest_strength = Integer.parseInt(et_chest_strength.getText().toString());
+                switch_chest.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Toast.makeText(getApplicationContext(), "UPGRADED!", Toast.LENGTH_SHORT).show();
+                            result = (chest_intellect + chest_discipline + chest_strength - CHEST_BONUS) / CHEST_MAX * 100;
+                        } else {
+                            result = (chest_intellect + chest_discipline + chest_strength) / CHEST_MAX * 100;
+                        }
 
-                    result = (chest_intellect + chest_discipline + chest_strength) / CHEST_MAX * 100;
-                    rounded = (double)Math.round(result * 10) / 10;
-                    tv_chest_roll.setText("" + rounded + " %");
+                        rounded = (double)Math.round(result * 10) / 10;
+                        tv_chest_roll.setText("" + rounded + " %");
 
-                    if (rounded >= 100) {
-                        tv_chest_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
-                    } else if (rounded >= 95) {
-                        tv_chest_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
-                    } else if (rounded >= 90) {
-                        tv_chest_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
-                    } else if (rounded >= 85) {
-                        tv_chest_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
-                    } else {
-                        tv_chest_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        if (rounded >= 100) {
+                            tv_chest_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
+                        } else if (rounded >= 95) {
+                            tv_chest_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
+                        } else if (rounded >= 90) {
+                            tv_chest_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
+                        } else if (rounded >= 85) {
+                            tv_chest_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
+                        } else {
+                            tv_chest_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        }
                     }
-                }
+                });
+                return false;
             }
         });
 
-        et_chest_strength.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        et_chest_strength.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!et_chest_intellect.getText().toString().equals("") ||
-                        !et_chest_discipline.getText().toString().equals("") ||
-                        !et_chest_strength.getText().toString().equals("")) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                chest_intellect = Integer.parseInt(et_chest_intellect.getText().toString());
+                chest_discipline = Integer.parseInt(et_chest_discipline.getText().toString());
+                chest_strength = Integer.parseInt(et_chest_strength.getText().toString());
 
-                    chest_intellect = Integer.parseInt(et_chest_intellect.getText().toString());
-                    chest_discipline = Integer.parseInt(et_chest_discipline.getText().toString());
-                    chest_strength = Integer.parseInt(et_chest_strength.getText().toString());
+                switch_chest.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Toast.makeText(getApplicationContext(), "UPGRADED!", Toast.LENGTH_SHORT).show();
+                            result = (chest_intellect + chest_discipline + chest_strength - CHEST_BONUS) / CHEST_MAX * 100;
+                        } else {
+                            result = (chest_intellect + chest_discipline + chest_strength) / CHEST_MAX * 100;
+                        }
 
-                    result = (chest_intellect + chest_discipline + chest_strength) / CHEST_MAX * 100;
-                    rounded = (double)Math.round(result * 10) / 10;
-                    tv_chest_roll.setText("" + rounded + " %");
+                        rounded = (double)Math.round(result * 10) / 10;
+                        tv_chest_roll.setText("" + rounded + " %");
 
-                    if (rounded >= 100) {
-                        tv_chest_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
-                    } else if (rounded >= 95) {
-                        tv_chest_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
-                    } else if (rounded >= 90) {
-                        tv_chest_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
-                    } else if (rounded >= 85) {
-                        tv_chest_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
-                    } else {
-                        tv_chest_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        if (rounded >= 100) {
+                            tv_chest_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
+                        } else if (rounded >= 95) {
+                            tv_chest_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
+                        } else if (rounded >= 90) {
+                            tv_chest_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
+                        } else if (rounded >= 85) {
+                            tv_chest_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
+                        } else {
+                            tv_chest_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        }
                     }
-                }
+                });
+                return false;
             }
         });
 
-        et_legs_intellect.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        et_legs_intellect.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!et_legs_intellect.getText().toString().equals("") ||
-                        !et_legs_discipline.getText().toString().equals("") ||
-                        !et_legs_strength.getText().toString().equals("")) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                legs_intellect = Integer.parseInt(et_legs_intellect.getText().toString());
+                legs_discipline = Integer.parseInt(et_legs_discipline.getText().toString());
+                legs_strength = Integer.parseInt(et_legs_strength.getText().toString());
 
-                    legs_intellect = Integer.parseInt(et_legs_intellect.getText().toString());
-                    legs_discipline = Integer.parseInt(et_legs_discipline.getText().toString());
-                    legs_strength = Integer.parseInt(et_legs_strength.getText().toString());
+                switch_legs.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Toast.makeText(getApplicationContext(), "UPGRADED!", Toast.LENGTH_SHORT).show();
+                            result = (legs_intellect + legs_discipline + legs_strength - LEGS_BONUS) / LEGS_MAX * 100;
+                        } else {
+                            result = (legs_intellect + legs_discipline + legs_strength) / LEGS_MAX * 100;
+                        }
 
-                    result = (legs_intellect + legs_discipline + legs_strength) / LEGS_MAX * 100;
-                    rounded = (double)Math.round(result * 10) / 10;
-                    tv_legs_roll.setText("" + rounded + " %");
+                        rounded = (double) Math.round(result * 10) / 10;
+                        tv_legs_roll.setText("" + rounded + " %");
 
-                    if (rounded >= 100) {
-                        tv_legs_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
-                    } else if (rounded >= 95) {
-                        tv_legs_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
-                    } else if (rounded >= 90) {
-                        tv_legs_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
-                    } else if (rounded >= 85) {
-                        tv_legs_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
-                    } else {
-                        tv_legs_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        if (rounded >= 100) {
+                            tv_legs_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
+                        } else if (rounded >= 95) {
+                            tv_legs_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
+                        } else if (rounded >= 90) {
+                            tv_legs_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
+                        } else if (rounded >= 85) {
+                            tv_legs_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
+                        } else {
+                            tv_legs_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        }
                     }
-                }
+                });
+                return false;
             }
         });
 
-        et_legs_discipline.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        et_legs_discipline.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!et_legs_intellect.getText().toString().equals("") ||
-                        !et_legs_discipline.getText().toString().equals("") ||
-                        !et_legs_strength.getText().toString().equals("")) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                legs_intellect = Integer.parseInt(et_legs_intellect.getText().toString());
+                legs_discipline = Integer.parseInt(et_legs_discipline.getText().toString());
+                legs_strength = Integer.parseInt(et_legs_strength.getText().toString());
 
-                    legs_intellect = Integer.parseInt(et_legs_intellect.getText().toString());
-                    legs_discipline = Integer.parseInt(et_legs_discipline.getText().toString());
-                    legs_strength = Integer.parseInt(et_legs_strength.getText().toString());
+                switch_legs.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Toast.makeText(getApplicationContext(), "UPGRADED!", Toast.LENGTH_SHORT).show();
+                            result = (legs_intellect + legs_discipline + legs_strength - LEGS_BONUS) / LEGS_MAX * 100;
+                        } else {
+                            result = (legs_intellect + legs_discipline + legs_strength) / LEGS_MAX * 100;
+                        }
 
-                    result = (legs_intellect + legs_discipline + legs_strength) / LEGS_MAX * 100;
-                    rounded = (double)Math.round(result * 10) / 10;
-                    tv_legs_roll.setText("" + rounded + " %");
+                        rounded = (double)Math.round(result * 10) / 10;
+                        tv_legs_roll.setText("" + rounded + " %");
 
-                    if (rounded >= 100) {
-                        tv_legs_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
-                    } else if (rounded >= 95) {
-                        tv_legs_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
-                    } else if (rounded >= 90) {
-                        tv_legs_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
-                    } else if (rounded >= 85) {
-                        tv_legs_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
-                    } else {
-                        tv_legs_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        if (rounded >= 100) {
+                            tv_legs_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
+                        } else if (rounded >= 95) {
+                            tv_legs_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
+                        } else if (rounded >= 90) {
+                            tv_legs_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
+                        } else if (rounded >= 85) {
+                            tv_legs_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
+                        } else {
+                            tv_legs_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        }
                     }
-                }
+                });
+                return false;
             }
         });
 
-        et_legs_strength.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        et_legs_strength.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!et_legs_intellect.getText().toString().equals("") ||
-                        !et_legs_discipline.getText().toString().equals("") ||
-                        !et_legs_strength.getText().toString().equals("")) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                legs_intellect = Integer.parseInt(et_legs_intellect.getText().toString());
+                legs_discipline = Integer.parseInt(et_legs_discipline.getText().toString());
+                legs_strength = Integer.parseInt(et_legs_strength.getText().toString());
 
-                    legs_intellect = Integer.parseInt(et_legs_intellect.getText().toString());
-                    legs_discipline = Integer.parseInt(et_legs_discipline.getText().toString());
-                    legs_strength = Integer.parseInt(et_legs_strength.getText().toString());
+                switch_legs.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Toast.makeText(getApplicationContext(), "UPGRADED!", Toast.LENGTH_SHORT).show();
+                            result = (legs_intellect + legs_discipline + legs_strength - LEGS_BONUS) / LEGS_MAX * 100;
+                        } else {
+                            result = (legs_intellect + legs_discipline + legs_strength) / LEGS_MAX * 100;
+                        }
 
-                    result = (legs_intellect + legs_discipline + legs_strength) / LEGS_MAX * 100;
-                    rounded = (double)Math.round(result * 10) / 10;
-                    tv_legs_roll.setText("" + rounded + " %");
+                        rounded = (double)Math.round(result * 10) / 10;
+                        tv_legs_roll.setText("" + rounded + " %");
 
-                    if (rounded >= 100) {
-                        tv_legs_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
-                    } else if (rounded >= 95) {
-                        tv_legs_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
-                    } else if (rounded >= 90) {
-                        tv_legs_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
-                    } else if (rounded >= 85) {
-                        tv_legs_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
-                    } else {
-                        tv_legs_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        if (rounded >= 100) {
+                            tv_legs_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
+                        } else if (rounded >= 95) {
+                            tv_legs_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
+                        } else if (rounded >= 90) {
+                            tv_legs_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
+                        } else if (rounded >= 85) {
+                            tv_legs_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
+                        } else {
+                            tv_legs_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        }
                     }
-                }
+                });
+                return false;
             }
         });
 
-        et_class_intellect.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        et_class_intellect.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!et_class_intellect.getText().toString().equals("") ||
-                        !et_class_discipline.getText().toString().equals("") ||
-                        !et_class_strength.getText().toString().equals("")) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                class_intellect = Integer.parseInt(et_class_intellect.getText().toString());
+                class_discipline = Integer.parseInt(et_class_discipline.getText().toString());
+                class_strength = Integer.parseInt(et_class_strength.getText().toString());
 
-                    class_intellect = Integer.parseInt(et_class_intellect.getText().toString());
-                    class_discipline = Integer.parseInt(et_class_discipline.getText().toString());
-                    class_strength = Integer.parseInt(et_class_strength.getText().toString());
+                switch_classItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Toast.makeText(getApplicationContext(), "UPGRADED!", Toast.LENGTH_SHORT).show();
+                            result = (class_intellect + class_discipline + class_strength - CLASS_BONUS) / CLASS_MAX * 100;
+                        } else {
+                            result = (class_intellect + class_discipline + class_strength) / CLASS_MAX * 100;
+                        }
 
-                    result = (class_intellect + class_discipline + class_strength) / CLASS_MAX * 100;
-                    rounded = (double)Math.round(result * 10) / 10;
-                    tv_class_roll.setText("" + rounded + " %");
+                        rounded = (double) Math.round(result * 10) / 10;
+                        tv_class_roll.setText("" + rounded + " %");
 
-                    if (rounded >= 100) {
-                        tv_class_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
-                    } else if (rounded >= 95) {
-                        tv_class_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
-                    } else if (rounded >= 90) {
-                        tv_class_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
-                    } else if (rounded >= 85) {
-                        tv_class_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
-                    } else {
-                        tv_class_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        if (rounded >= 100) {
+                            tv_class_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
+                        } else if (rounded >= 95) {
+                            tv_class_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
+                        } else if (rounded >= 90) {
+                            tv_class_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
+                        } else if (rounded >= 85) {
+                            tv_class_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
+                        } else {
+                            tv_class_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        }
                     }
-                }
+                });
+                return false;
             }
         });
 
-        et_class_discipline.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        et_class_discipline.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!et_class_intellect.getText().toString().equals("") ||
-                        !et_class_discipline.getText().toString().equals("") ||
-                        !et_class_strength.getText().toString().equals("")) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                class_intellect = Integer.parseInt(et_class_intellect.getText().toString());
+                class_discipline = Integer.parseInt(et_class_discipline.getText().toString());
+                class_strength = Integer.parseInt(et_class_strength.getText().toString());
 
-                    class_intellect = Integer.parseInt(et_class_intellect.getText().toString());
-                    class_discipline = Integer.parseInt(et_class_discipline.getText().toString());
-                    class_strength = Integer.parseInt(et_class_strength.getText().toString());
+                switch_classItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Toast.makeText(getApplicationContext(), "UPGRADED!", Toast.LENGTH_SHORT).show();
+                            result = (class_intellect + class_discipline + class_strength - CLASS_BONUS) / CLASS_MAX * 100;
+                        } else {
+                            result = (class_intellect + class_discipline + class_strength) / CLASS_MAX * 100;
+                        }
 
-                    result = (class_intellect + class_discipline + class_strength) / CLASS_MAX * 100;
-                    rounded = (double)Math.round(result * 10) / 10;
-                    tv_class_roll.setText("" + rounded + " %");
+                        rounded = (double)Math.round(result * 10) / 10;
+                        tv_class_roll.setText("" + rounded + " %");
 
-                    if (rounded >= 100) {
-                        tv_class_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
-                    } else if (rounded >= 95) {
-                        tv_class_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
-                    } else if (rounded >= 90) {
-                        tv_class_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
-                    } else if (rounded >= 85) {
-                        tv_class_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
-                    } else {
-                        tv_class_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        if (rounded >= 100) {
+                            tv_class_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
+                        } else if (rounded >= 95) {
+                            tv_class_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
+                        } else if (rounded >= 90) {
+                            tv_class_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
+                        } else if (rounded >= 85) {
+                            tv_class_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
+                        } else {
+                            tv_class_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        }
                     }
-                }
+                });
+                return false;
             }
         });
 
-        et_class_strength.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        et_class_strength.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!et_class_intellect.getText().toString().equals("") ||
-                        !et_class_discipline.getText().toString().equals("") ||
-                        !et_class_strength.getText().toString().equals("")) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                class_intellect = Integer.parseInt(et_class_intellect.getText().toString());
+                class_discipline = Integer.parseInt(et_class_discipline.getText().toString());
+                class_strength = Integer.parseInt(et_class_strength.getText().toString());
 
-                    class_intellect = Integer.parseInt(et_class_intellect.getText().toString());
-                    class_discipline = Integer.parseInt(et_class_discipline.getText().toString());
-                    class_strength = Integer.parseInt(et_class_strength.getText().toString());
+                switch_classItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Toast.makeText(getApplicationContext(), "UPGRADED!", Toast.LENGTH_SHORT).show();
+                            result = (class_intellect + class_discipline + class_strength - CLASS_BONUS) / CLASS_MAX * 100;
+                        } else {
+                            result = (class_intellect + class_discipline + class_strength) / CLASS_MAX * 100;
+                        }
 
-                    result = (class_intellect + class_discipline + class_strength) / CLASS_MAX * 100;
-                    rounded = (double)Math.round(result * 10) / 10;
-                    tv_class_roll.setText("" + rounded + " %");
+                        rounded = (double)Math.round(result * 10) / 10;
+                        tv_class_roll.setText("" + rounded + " %");
 
-                    if (rounded >= 100) {
-                        tv_class_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
-                    } else if (rounded >= 95) {
-                        tv_class_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
-                    } else if (rounded >= 90) {
-                        tv_class_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
-                    } else if (rounded >= 85) {
-                        tv_class_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
-                    } else {
-                        tv_class_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        if (rounded >= 100) {
+                            tv_class_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
+                        } else if (rounded >= 95) {
+                            tv_class_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
+                        } else if (rounded >= 90) {
+                            tv_class_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
+                        } else if (rounded >= 85) {
+                            tv_class_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
+                        } else {
+                            tv_class_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        }
                     }
-                }
+                });
+                return false;
             }
         });
 
-        et_artifact_intellect.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        et_artifact_intellect.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!et_artifact_intellect.getText().toString().equals("") ||
-                        !et_artifact_discipline.getText().toString().equals("") ||
-                        !et_artifact_strength.getText().toString().equals("")) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                artifact_intellect = Integer.parseInt(et_artifact_intellect.getText().toString());
+                artifact_discipline = Integer.parseInt(et_artifact_discipline.getText().toString());
+                artifact_strength = Integer.parseInt(et_artifact_strength.getText().toString());
 
-                    artifact_intellect = Integer.parseInt(et_artifact_intellect.getText().toString());
-                    artifact_discipline = Integer.parseInt(et_artifact_discipline.getText().toString());
-                    artifact_strength = Integer.parseInt(et_artifact_strength.getText().toString());
+                switch_artifact.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Toast.makeText(getApplicationContext(), "UPGRADED!", Toast.LENGTH_SHORT).show();
+                            result = (artifact_intellect + artifact_discipline + artifact_strength - ARTIFACT_BONUS) / ARTIFACT_MAX * 100;
+                        } else {
+                            result = (artifact_intellect + artifact_discipline + artifact_strength) / ARTIFACT_MAX * 100;
+                        }
 
-                    result = (artifact_intellect + artifact_discipline + artifact_strength) / ARTIFACT_MAX * 100;
-                    rounded = (double)Math.round(result * 10) / 10;
-                    tv_artifact_roll.setText("" + rounded + " %");
+                        rounded = (double) Math.round(result * 10) / 10;
+                        tv_artifact_roll.setText("" + rounded + " %");
 
-                    if (rounded >= 100) {
-                        tv_artifact_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
-                    } else if (rounded >= 95) {
-                        tv_artifact_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
-                    } else if (rounded >= 90) {
-                        tv_artifact_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
-                    } else if (rounded >= 85) {
-                        tv_artifact_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
-                    } else {
-                        tv_artifact_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        if (rounded >= 100) {
+                            tv_artifact_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
+                        } else if (rounded >= 95) {
+                            tv_artifact_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
+                        } else if (rounded >= 90) {
+                            tv_artifact_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
+                        } else if (rounded >= 85) {
+                            tv_artifact_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
+                        } else {
+                            tv_artifact_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        }
                     }
-                }
+                });
+                return false;
             }
         });
 
-        et_artifact_discipline.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        et_artifact_discipline.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!et_artifact_intellect.getText().toString().equals("") ||
-                        !et_artifact_discipline.getText().toString().equals("") ||
-                        !et_artifact_strength.getText().toString().equals("")) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                artifact_intellect = Integer.parseInt(et_artifact_intellect.getText().toString());
+                artifact_discipline = Integer.parseInt(et_artifact_discipline.getText().toString());
+                artifact_strength = Integer.parseInt(et_artifact_strength.getText().toString());
 
-                    artifact_intellect = Integer.parseInt(et_artifact_intellect.getText().toString());
-                    artifact_discipline = Integer.parseInt(et_artifact_discipline.getText().toString());
-                    artifact_strength = Integer.parseInt(et_artifact_strength.getText().toString());
+                switch_artifact.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Toast.makeText(getApplicationContext(), "UPGRADED!", Toast.LENGTH_SHORT).show();
+                            result = (artifact_intellect + artifact_discipline + artifact_strength - ARTIFACT_BONUS) / ARTIFACT_MAX * 100;
+                        } else {
+                            result = (artifact_intellect + artifact_discipline + artifact_strength) / ARTIFACT_MAX * 100;
+                        }
 
-                    result = (artifact_intellect + artifact_discipline + artifact_strength) / ARTIFACT_MAX * 100;
-                    rounded = (double)Math.round(result * 10) / 10;
-                    tv_artifact_roll.setText("" + rounded + " %");
+                        rounded = (double)Math.round(result * 10) / 10;
+                        tv_artifact_roll.setText("" + rounded + " %");
 
-                    if (rounded >= 100) {
-                        tv_artifact_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
-                    } else if (rounded >= 95) {
-                        tv_artifact_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
-                    } else if (rounded >= 90) {
-                        tv_artifact_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
-                    } else if (rounded >= 85) {
-                        tv_artifact_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
-                    } else {
-                        tv_artifact_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        if (rounded >= 100) {
+                            tv_artifact_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
+                        } else if (rounded >= 95) {
+                            tv_artifact_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
+                        } else if (rounded >= 90) {
+                            tv_artifact_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
+                        } else if (rounded >= 85) {
+                            tv_artifact_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
+                        } else {
+                            tv_artifact_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        }
                     }
-                }
+                });
+                return false;
             }
         });
 
-        et_artifact_strength.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        et_artifact_strength.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!et_artifact_intellect.getText().toString().equals("") ||
-                        !et_artifact_discipline.getText().toString().equals("") ||
-                        !et_artifact_strength.getText().toString().equals("")) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                artifact_intellect = Integer.parseInt(et_artifact_intellect.getText().toString());
+                artifact_discipline = Integer.parseInt(et_artifact_discipline.getText().toString());
+                artifact_strength = Integer.parseInt(et_artifact_strength.getText().toString());
 
-                    artifact_intellect = Integer.parseInt(et_artifact_intellect.getText().toString());
-                    artifact_discipline = Integer.parseInt(et_artifact_discipline.getText().toString());
-                    artifact_strength = Integer.parseInt(et_artifact_strength.getText().toString());
+                switch_artifact.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Toast.makeText(getApplicationContext(), "UPGRADED!", Toast.LENGTH_SHORT).show();
+                            result = (artifact_intellect + artifact_discipline + artifact_strength - ARTIFACT_BONUS) / ARTIFACT_MAX * 100;
+                        } else {
+                            result = (artifact_intellect + artifact_discipline + artifact_strength) / ARTIFACT_MAX * 100;
+                        }
 
-                    result = (artifact_intellect + artifact_discipline + artifact_strength) / ARTIFACT_MAX * 100;
-                    rounded = (double)Math.round(result * 10) / 10;
-                    tv_artifact_roll.setText("" + rounded + " %");
+                        rounded = (double)Math.round(result * 10) / 10;
+                        tv_artifact_roll.setText("" + rounded + " %");
 
-                    if (rounded >= 100) {
-                        tv_artifact_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
-                    } else if (rounded >= 95) {
-                        tv_artifact_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
-                    } else if (rounded >= 90) {
-                        tv_artifact_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
-                    } else if (rounded >= 85) {
-                        tv_artifact_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
-                    } else {
-                        tv_artifact_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        if (rounded >= 100) {
+                            tv_artifact_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
+                        } else if (rounded >= 95) {
+                            tv_artifact_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
+                        } else if (rounded >= 90) {
+                            tv_artifact_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
+                        } else if (rounded >= 85) {
+                            tv_artifact_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
+                        } else {
+                            tv_artifact_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        }
                     }
-                }
+                });
+                return false;
             }
         });
 
-        et_ghost_intellect.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        et_ghost_intellect.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!et_ghost_intellect.getText().toString().equals("") ||
-                        !et_ghost_discipline.getText().toString().equals("") ||
-                        !et_ghost_strength.getText().toString().equals("")) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                ghost_intellect = Integer.parseInt(et_ghost_intellect.getText().toString());
+                ghost_discipline = Integer.parseInt(et_ghost_discipline.getText().toString());
+                ghost_strength = Integer.parseInt(et_ghost_strength.getText().toString());
 
-                    ghost_intellect = Integer.parseInt(et_ghost_intellect.getText().toString());
-                    ghost_discipline = Integer.parseInt(et_ghost_discipline.getText().toString());
-                    ghost_strength = Integer.parseInt(et_ghost_strength.getText().toString());
+                switch_ghost.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Toast.makeText(getApplicationContext(), "UPGRADED!", Toast.LENGTH_SHORT).show();
+                            result = (ghost_intellect + ghost_discipline + ghost_strength - GHOST_BONUS) / GHOST_MAX * 100;
+                        } else {
+                            result = (ghost_intellect + ghost_discipline + ghost_strength) / GHOST_MAX * 100;
+                        }
 
-                    result = (ghost_intellect + ghost_discipline + ghost_strength) / GHOST_MAX * 100;
-                    rounded = (double)Math.round(result * 10) / 10;
-                    tv_ghost_roll.setText("" + rounded + " %");
+                        rounded = (double) Math.round(result * 10) / 10;
+                        tv_ghost_roll.setText("" + rounded + " %");
 
-                    if (rounded >= 100) {
-                        tv_ghost_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
-                    } else if (rounded >= 95) {
-                        tv_ghost_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
-                    } else if (rounded >= 90) {
-                        tv_ghost_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
-                    } else if (rounded >= 85) {
-                        tv_ghost_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
-                    } else {
-                        tv_ghost_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        if (rounded >= 100) {
+                            tv_ghost_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
+                        } else if (rounded >= 95) {
+                            tv_ghost_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
+                        } else if (rounded >= 90) {
+                            tv_ghost_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
+                        } else if (rounded >= 85) {
+                            tv_ghost_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
+                        } else {
+                            tv_ghost_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        }
                     }
-                }
+                });
+                return false;
             }
         });
 
-        et_ghost_discipline.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        et_ghost_discipline.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!et_ghost_intellect.getText().toString().equals("") ||
-                        !et_ghost_discipline.getText().toString().equals("") ||
-                        !et_ghost_strength.getText().toString().equals("")) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                ghost_intellect = Integer.parseInt(et_ghost_intellect.getText().toString());
+                ghost_discipline = Integer.parseInt(et_ghost_discipline.getText().toString());
+                ghost_strength = Integer.parseInt(et_ghost_strength.getText().toString());
 
-                    ghost_intellect = Integer.parseInt(et_ghost_intellect.getText().toString());
-                    ghost_discipline = Integer.parseInt(et_ghost_discipline.getText().toString());
-                    ghost_strength = Integer.parseInt(et_ghost_strength.getText().toString());
+                switch_ghost.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Toast.makeText(getApplicationContext(), "UPGRADED!", Toast.LENGTH_SHORT).show();
+                            result = (ghost_intellect + ghost_discipline + ghost_strength - GHOST_BONUS) / GHOST_MAX * 100;
+                        } else {
+                            result = (ghost_intellect + ghost_discipline + ghost_strength) / GHOST_MAX * 100;
+                        }
 
-                    result = (ghost_intellect + ghost_discipline + ghost_strength) / GHOST_MAX * 100;
-                    rounded = (double)Math.round(result * 10) / 10;
-                    tv_ghost_roll.setText("" + rounded + " %");
+                        rounded = (double)Math.round(result * 10) / 10;
+                        tv_ghost_roll.setText("" + rounded + " %");
 
-                    if (rounded >= 100) {
-                        tv_ghost_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
-                    } else if (rounded >= 95) {
-                        tv_ghost_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
-                    } else if (rounded >= 90) {
-                        tv_ghost_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
-                    } else if (rounded >= 85) {
-                        tv_ghost_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
-                    } else {
-                        tv_ghost_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        if (rounded >= 100) {
+                            tv_ghost_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
+                        } else if (rounded >= 95) {
+                            tv_ghost_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
+                        } else if (rounded >= 90) {
+                            tv_ghost_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
+                        } else if (rounded >= 85) {
+                            tv_ghost_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
+                        } else {
+                            tv_ghost_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        }
                     }
-                }
+                });
+                return false;
             }
         });
 
-        et_ghost_strength.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        et_ghost_strength.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!et_ghost_intellect.getText().toString().equals("") ||
-                        !et_ghost_discipline.getText().toString().equals("") ||
-                        !et_ghost_strength.getText().toString().equals("")) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                ghost_intellect = Integer.parseInt(et_ghost_intellect.getText().toString());
+                ghost_discipline = Integer.parseInt(et_ghost_discipline.getText().toString());
+                ghost_strength = Integer.parseInt(et_ghost_strength.getText().toString());
 
-                    ghost_intellect = Integer.parseInt(et_ghost_intellect.getText().toString());
-                    ghost_discipline = Integer.parseInt(et_ghost_discipline.getText().toString());
-                    ghost_strength = Integer.parseInt(et_ghost_strength.getText().toString());
+                switch_ghost.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            Toast.makeText(getApplicationContext(), "UPGRADED!", Toast.LENGTH_SHORT).show();
+                            result = (ghost_intellect + ghost_discipline + ghost_strength - GHOST_BONUS) / GHOST_MAX * 100;
+                        } else {
+                            result = (ghost_intellect + ghost_discipline + ghost_strength) / GHOST_MAX * 100;
+                        }
 
-                    result = (ghost_intellect + ghost_discipline + ghost_strength) / GHOST_MAX * 100;
-                    rounded = (double)Math.round(result * 10) / 10;
-                    tv_ghost_roll.setText("" + rounded + " %");
+                        rounded = (double)Math.round(result * 10) / 10;
+                        tv_ghost_roll.setText("" + rounded + " %");
 
-                    if (rounded >= 100) {
-                        tv_ghost_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
-                    } else if (rounded >= 95) {
-                        tv_ghost_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
-                    } else if (rounded >= 90) {
-                        tv_ghost_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
-                    } else if (rounded >= 85) {
-                        tv_ghost_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
-                    } else {
-                        tv_ghost_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        if (rounded >= 100) {
+                            tv_ghost_roll.setBackgroundColor(Color.parseColor("#ff33b5e5")); // holo_blue_light
+                        } else if (rounded >= 95) {
+                            tv_ghost_roll.setBackgroundColor(Color.parseColor("#ff99cc00")); // holo_green_light
+                        } else if (rounded >= 90) {
+                            tv_ghost_roll.setBackgroundColor(Color.parseColor("#ffffbb33")); // holo_orange_light
+                        } else if (rounded >= 85) {
+                            tv_ghost_roll.setBackgroundColor(Color.parseColor("#ffff8800")); // holo_orange_dark
+                        } else {
+                            tv_ghost_roll.setBackgroundColor(Color.parseColor("#ffcc0000")); // holo_red_dark
+                        }
                     }
-                }
+                });
+                return false;
             }
         });
 
@@ -831,7 +997,7 @@ public class TierActivity extends AppCompatActivity {
                 tierStrengthTotal = (double)Math.round(strengthTotal / 60 * 10) / 10;
                 tv_tier_strength.setText("" + tierStrengthTotal);
 
-                characterTier = (double)Math.round((tierIntelTotal + tierDisciplineTotal + tierStrengthTotal + 2.433) * 10) / 10;
+                characterTier = (double)Math.round((tierIntelTotal + tierDisciplineTotal + tierStrengthTotal) * 10) / 10;
                 tv_1.setText("" + characterTier);
 
                 if (characterTier >= 12) {

@@ -48,7 +48,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
@@ -63,7 +63,7 @@
                     android:layout_height="80dp"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:weightSum="5">
+                    android:weightSum="6">
 
                     <TextView
                         android:id="@+id/tv_1"
@@ -72,7 +72,17 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text=""
-                        android:textSize="28dp" />
+                        android:textSize="28sp" />
+
+                    <TextView
+                        android:id="@+id/tv_upgrade"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:rotation="270"
+                        android:text="@string/tv_upgrade"
+                        android:textColor="#ffe100" />
 
                     <TextView
                         android:id="@+id/tv_intellect"
@@ -81,7 +91,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:rotation="270"
-                        android:text="Intellect"
+                        android:text="@string/tv_intellect"
                         android:textColor="#ffe100" />
 
                     <TextView
@@ -91,7 +101,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:rotation="270"
-                        android:text="Discipline"
+                        android:text="@string/tv_discipline"
                         android:textColor="#ffe100" />
 
                     <TextView
@@ -101,7 +111,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:rotation="270"
-                        android:text="Strength"
+                        android:text="@string/tv_strength"
                         android:textColor="#ffe100" />
 
                     <TextView
@@ -110,7 +120,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Roll %age"
+                        android:text="@string/tv_rollPercentage"
                         android:textColor="#ffe100" />
 
                 </LinearLayout>
@@ -120,7 +130,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:weightSum="5">
+                    android:weightSum="6">
 
                     <TextView
                         android:id="@+id/tv_helm"
@@ -130,6 +140,14 @@
                         android:gravity="center_vertical"
                         android:text="@string/tv_helmet"
                         android:textColor="#ffe100" />
+
+                    <Switch
+                        android:id="@+id/switch_helm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:switchTextAppearance="@style/TextAppearance.AppCompat" />
 
                     <EditText
                         android:id="@+id/et_helm_intellect"
@@ -178,7 +196,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:weightSum="5">
+                    android:weightSum="6">
 
                     <TextView
                         android:id="@+id/tv_gauntlet"
@@ -188,6 +206,13 @@
                         android:gravity="center_vertical"
                         android:text="@string/tv_gauntlet"
                         android:textColor="#ffe100" />
+
+                    <Switch
+                        android:id="@+id/switch_gauntlet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center" />
 
                     <EditText
                         android:id="@+id/et_gauntlet_intellect"
@@ -236,7 +261,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:weightSum="5">
+                    android:weightSum="6">
 
                     <TextView
                         android:id="@+id/tv_chest"
@@ -246,6 +271,13 @@
                         android:gravity="center_vertical"
                         android:text="@string/tv_chest"
                         android:textColor="#ffe100" />
+
+                    <Switch
+                        android:id="@+id/switch_chest"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center" />
 
                     <EditText
                         android:id="@+id/et_chest_intellect"
@@ -294,7 +326,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:weightSum="5">
+                    android:weightSum="6">
 
                     <TextView
                         android:id="@+id/tv_legs"
@@ -304,6 +336,13 @@
                         android:gravity="center_vertical"
                         android:text="@string/tv_legs"
                         android:textColor="#ffe100" />
+
+                    <Switch
+                        android:id="@+id/switch_legs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center" />
 
                     <EditText
                         android:id="@+id/et_legs_intellect"
@@ -352,7 +391,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:weightSum="5">
+                    android:weightSum="6">
 
                     <TextView
                         android:id="@+id/tv_class"
@@ -362,6 +401,13 @@
                         android:gravity="center_vertical"
                         android:text="@string/tv_class_item"
                         android:textColor="#ffe100" />
+
+                    <Switch
+                        android:id="@+id/switch_classItem"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center" />
 
                     <EditText
                         android:id="@+id/et_class_intellect"
@@ -410,7 +456,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:weightSum="5">
+                    android:weightSum="6">
 
                     <TextView
                         android:id="@+id/tv_artifact"
@@ -420,6 +466,13 @@
                         android:gravity="center_vertical"
                         android:text="@string/tv_artifact"
                         android:textColor="#ffe100" />
+
+                    <Switch
+                        android:id="@+id/switch_artifact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center" />
 
                     <EditText
                         android:id="@+id/et_artifact_intellect"
@@ -468,7 +521,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:weightSum="5">
+                    android:weightSum="6">
 
                     <TextView
                         android:id="@+id/tv_ghost"
@@ -478,6 +531,13 @@
                         android:gravity="center_vertical"
                         android:text="@string/tv_ghost"
                         android:textColor="#ffe100" />
+
+                    <Switch
+                        android:id="@+id/switch_ghost"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center" />
 
                     <EditText
                         android:id="@+id/et_ghost_intellect"
@@ -528,7 +588,7 @@
                     android:orientation="horizontal"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
-                    android:weightSum="5">
+                    android:weightSum="6">
 
                     <TextView
                         android:id="@+id/tv_total"
@@ -538,6 +598,11 @@
                         android:gravity="center_vertical"
                         android:text="@string/tv_total"
                         android:textColor="#ffe100" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/tv_total_intellect"
@@ -579,7 +644,7 @@
                     android:orientation="horizontal"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
-                    android:weightSum="5">
+                    android:weightSum="6">
 
                     <TextView
                         android:id="@+id/tv_tier"
@@ -589,6 +654,11 @@
                         android:gravity="center_vertical"
                         android:text="@string/tv_tier"
                         android:textColor="#ffe100" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/tv_tier_intellect"
