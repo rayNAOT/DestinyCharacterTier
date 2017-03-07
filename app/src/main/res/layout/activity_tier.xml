@@ -24,10 +24,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/customTranslucent"
             android:gravity="center_vertical|center_horizontal|center"
             android:text="SHOW TIER"
-            android:textColor="#ffffff"
-            android:background="@color/customTranslucent" />
+            android:textColor="#ffffff" />
 
         <EditText
             android:id="@+id/et_class_name"
@@ -147,6 +147,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
+                        android:onClick="upgradeHelm"
                         android:switchTextAppearance="@style/TextAppearance.AppCompat" />
 
                     <EditText
@@ -212,7 +213,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:onClick="upgradeGauntlet" />
 
                     <EditText
                         android:id="@+id/et_gauntlet_intellect"
@@ -277,7 +279,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:onClick="upgradeChest" />
 
                     <EditText
                         android:id="@+id/et_chest_intellect"
@@ -342,7 +345,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:onClick="upgradeLegs" />
 
                     <EditText
                         android:id="@+id/et_legs_intellect"
@@ -407,7 +411,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:onClick="upgradeClassItem" />
 
                     <EditText
                         android:id="@+id/et_class_intellect"
@@ -472,7 +477,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:onClick="upgradeArtifact" />
 
                     <EditText
                         android:id="@+id/et_artifact_intellect"
@@ -537,7 +543,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:onClick="upgradeGhost" />
 
                     <EditText
                         android:id="@+id/et_ghost_intellect"
@@ -707,40 +714,40 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:focusable="false"
-                    android:textColor="#ffffff"
                     android:background="@color/customTranslucent"
-                    android:text="INFO" />
+                    android:focusable="false"
+                    android:text="INFO"
+                    android:textColor="#ffffff" />
 
                 <Button
                     android:id="@+id/btn_save"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#ffffff"
-                    android:background="@color/customTranslucent"
                     android:layout_weight="1"
-                    android:text="SAVE" />
+                    android:background="@color/customTranslucent"
+                    android:text="SAVE"
+                    android:textColor="#ffffff" />
 
                 <Button
                     android:id="@+id/btn_database"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#ffffff"
-                    android:background="@color/customTranslucent"
                     android:layout_weight="1"
+                    android:background="@color/customTranslucent"
                     android:focusable="false"
                     android:text="DATABASE"
+                    android:textColor="#ffffff"
                     android:textSize="13sp" />
 
                 <Button
                     android:id="@+id/btn_about"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#ffffff"
-                    android:background="@color/customTranslucent"
                     android:layout_weight="1"
+                    android:background="@color/customTranslucent"
                     android:focusable="false"
-                    android:text="ABOUT" />
+                    android:text="ABOUT"
+                    android:textColor="#ffffff" />
 
             </LinearLayout>
 
