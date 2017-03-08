@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="ABOUT THIS APPLICATION"
+                android:text="@string/about_title"
                 android:textColor="#ffffff" />
 
         </TableRow>
@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="This application is designed to help you calculate the quality of your armour pieces."
+                android:text="@string/about_text1"
                 android:textColor="#ffffff" />
 
         </TableRow>
@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Enter data into cells provided for Intellect, Discipline and Strength."
+                android:text="@string/about_text2"
                 android:textColor="#ffffff" />
 
         </TableRow>
@@ -69,14 +69,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Cells must not be left blank i.e. Must have a zero if attribute does not contain a stat."
+                android:text="@string/about_text3"
                 android:textColor="#ffffff" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
         </TableRow>
 
@@ -89,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Press the 'SHOW TIER' button to reveal total figures and overall 'tier' of armour set. "
+                android:text="@string/about_text4"
                 android:textColor="#ffffff" />
 
         </TableRow>
@@ -103,7 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="A Class Name can be entered into the provided field."
+                android:text="@string/about_text5"
                 android:textColor="#ffffff" />
 
         </TableRow>
@@ -117,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Once Class Name has been entered and SHOW TIER has been selected, press 'SAVE' to insert values into database"
+                android:text="@string/about_text6"
                 android:textColor="#ffffff" />
 
         </TableRow>
@@ -131,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="To view saved values, press the 'DATABASE' button."
+                android:text="@string/about_text7"
                 android:textColor="#ffffff" />
 
         </TableRow>
@@ -145,7 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Data entered must be base stats excluding upgrade bonus. See 'INFO' page for bonus amounts."
+                android:text="@string/about_text8"
                 android:textColor="#ffffff" />
 
         </TableRow>

@@ -20,7 +20,7 @@
         android:textColor="#ffffff"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
-        android:text="INFORMATION" />
+        android:text="@string/info_title" />
 
     <TextView
         android:id="@+id/tv_info2"
@@ -31,7 +31,7 @@
         android:layout_below="@+id/tv_info1"
         android:textColor="#ffffff"
         android:padding="10dp"
-        android:text="Each piece of armour can roll with a maximum of two attributes plus a bonus once upgraded" />
+        android:text="@string/info_text1" />
 
     <TableLayout
         android:id="@+id/tableLayout"
@@ -463,7 +463,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:padding="10dp"
-                android:text="Each attribute is capped at 300 points (tier 5)." />
+                android:text="@string/info_text2" />
         </TableRow>
 
         <TableRow
@@ -476,7 +476,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:padding="10dp"
-                android:text="To achieve their 12, two attributes require tier 5 plus tier 2 (120 points) on a third attribute." />
+                android:text="@string/info_text3" />
         </TableRow>
 
         <TableRow
@@ -489,7 +489,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:padding="10dp"
-                android:text="It is possible to achieve greater than 100% on artifacts." />
+                android:text="@string/info_text4" />
         </TableRow>
 
     </TableLayout>

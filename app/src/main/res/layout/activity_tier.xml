@@ -26,7 +26,7 @@
             android:layout_weight="1"
             android:background="@color/customTranslucent"
             android:gravity="center_vertical|center_horizontal|center"
-            android:text="SHOW TIER"
+            android:text="@string/show_tier"
             android:textColor="#ffffff" />
 
         <EditText
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:hint="Enter class name"
+            android:hint="@string/enter_class_name"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:textColor="#ffffff"
@@ -590,6 +590,50 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="0sp"
+                    android:orientation="horizontal"
+                    android:weightSum="6">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="number" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="horizontal"
@@ -716,7 +760,7 @@
                     android:layout_weight="1"
                     android:background="@color/customTranslucent"
                     android:focusable="false"
-                    android:text="INFO"
+                    android:text="@string/info"
                     android:textColor="#ffffff" />
 
                 <Button
@@ -725,7 +769,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@color/customTranslucent"
-                    android:text="SAVE"
+                    android:text="@string/save"
                     android:textColor="#ffffff" />
 
                 <Button
@@ -735,7 +779,7 @@
                     android:layout_weight="1"
                     android:background="@color/customTranslucent"
                     android:focusable="false"
-                    android:text="DATABASE"
+                    android:text="@string/database"
                     android:textColor="#ffffff"
                     android:textSize="13sp" />
 
@@ -746,14 +790,10 @@
                     android:layout_weight="1"
                     android:background="@color/customTranslucent"
                     android:focusable="false"
-                    android:text="ABOUT"
+                    android:text="@string/about"
                     android:textColor="#ffffff" />
 
             </LinearLayout>
-
         </LinearLayout>
-
     </ScrollView>
-
-
 </LinearLayout>

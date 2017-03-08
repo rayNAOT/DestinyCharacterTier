@@ -15,4 +15,24 @@
     <string name="tv_strength">Strength</string>
     <string name="tv_rollPercentage">Roll %age</string>
     <string name="tv_upgrade">Upgraded</string>
+    <string name="show_tier">SHOW TIER</string>
+    <string name="enter_class_name">Enter class name</string>
+    <string name="info">INFO</string>
+    <string name="save">SAVE</string>
+    <string name="database">DATABASE</string>
+    <string name="about">ABOUT</string>
+    <string name="about_title">ABOUT THIS APPLICATION</string>
+    <string name="about_text1">This application is designed to help you calculate the quality of your armour pieces.</string>
+    <string name="about_text2">Enter data into cells provided for Intellect, Discipline and Strength.</string>
+    <string name="about_text3">Cells must not be left blank i.e. Must have a zero if attribute does not contain a stat.</string>
+    <string name="about_text4">Press the \'SHOW TIER\' button to reveal total figures and overall \'tier\' of armour set.</string>
+    <string name="about_text5">A Class Name can be entered into the provided field.</string>
+    <string name="about_text6">Once Class Name has been entered and SHOW TIER has been selected, press \'SAVE\' to insert values into database</string>
+    <string name="about_text7">To view saved values, press the \'DATABASE\' button.</string>
+    <string name="about_text8">Data entered must be base stats excluding upgrade bonus. See \'INFO\' page for bonus amounts.</string>
+    <string name="info_title">INFORMATION</string>
+    <string name="info_text1">Each piece of armour can roll with a maximum of two attributes plus a bonus once upgraded</string>
+    <string name="info_text2">Each attribute is capped at 300 points (tier 5).</string>
+    <string name="info_text3">To achieve their 12, two attributes require tier 5 plus tier 2 (120 points) on a third attribute.</string>
+    <string name="info_text4">It is possible to achieve greater than 100% on artifacts.</string>
 </resources>
