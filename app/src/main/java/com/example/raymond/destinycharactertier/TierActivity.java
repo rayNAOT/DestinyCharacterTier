@@ -19,13 +19,13 @@ import android.widget.Toast;
 public class TierActivity extends AppCompatActivity {
 /*
 * TODO
-* Exception handling if user does not enter number in editText field - app currently closes
 * Add buttons to INFO and ABOUT pages to direct users to other activities
 * Update database to display data on separate activity with compare function
 * Limit size of numbers that can be entered in editText fields
 * Limit length of text length for class name
 * Prevent users from saving data if no data is entered
 * Issue with Ghost setOnEditorActionListener, function not changing focus to next editText element. Causing a return instead.
+*   above issue temporarily fixed by adding additional row under ghost with 0 height.
 * */
 
     DatabaseHandler myDb;
@@ -158,48 +158,88 @@ public class TierActivity extends AppCompatActivity {
         AddData();
         viewAll();
 
+        // setSelectAllOnFocus automatically selects all when user selects an EditText field i.e. User can immediately override existing data.
         et_helm_intellect.setSelectAllOnFocus(true);
-
         et_helm_discipline.setSelectAllOnFocus(true);
-
         et_helm_strength.setSelectAllOnFocus(true);
-
         et_gauntlet_intellect.setSelectAllOnFocus(true);
-
         et_gauntlet_discipline.setSelectAllOnFocus(true);
-
         et_gauntlet_strength.setSelectAllOnFocus(true);
-
         et_chest_intellect.setSelectAllOnFocus(true);
-
         et_chest_discipline.setSelectAllOnFocus(true);
-
         et_chest_strength.setSelectAllOnFocus(true);
-
         et_legs_intellect.setSelectAllOnFocus(true);
-
         et_legs_discipline.setSelectAllOnFocus(true);
-
         et_legs_strength.setSelectAllOnFocus(true);
-
         et_class_intellect.setSelectAllOnFocus(true);
-
         et_class_discipline.setSelectAllOnFocus(true);
-
         et_class_strength.setSelectAllOnFocus(true);
-
         et_artifact_intellect.setSelectAllOnFocus(true);
-
         et_artifact_discipline.setSelectAllOnFocus(true);
-
         et_artifact_strength.setSelectAllOnFocus(true);
-
         et_ghost_intellect.setSelectAllOnFocus(true);
-
         et_ghost_discipline.setSelectAllOnFocus(true);
-
         et_ghost_strength.setSelectAllOnFocus(true);
 
+        // setOnCheckedChangeListener prompts users when they have toggled the switch to indicate gear has been upgraded.
+        switch_helm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Toast.makeText(getApplicationContext(), "HELMET UPGRADED!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        switch_gauntlet.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Toast.makeText(getApplicationContext(), "GAUNTLET UPGRADED!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        switch_chest.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Toast.makeText(getApplicationContext(), "CHEST UPGRADED!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        switch_legs.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Toast.makeText(getApplicationContext(), "LEGS UPGRADED!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        switch_classItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Toast.makeText(getApplicationContext(), "CLASS ITEM UPGRADED!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        switch_artifact.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Toast.makeText(getApplicationContext(), "ARTIFACT UPGRADED!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        switch_ghost.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Toast.makeText(getApplicationContext(), "GHOST UPGRADED!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        // setOnEditorActionListener performs calculation when user presses the next button/return button on keyboard.
         et_helm_intellect.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -207,7 +247,6 @@ public class TierActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         et_helm_discipline.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -215,7 +254,6 @@ public class TierActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         et_helm_strength.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -223,7 +261,6 @@ public class TierActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         et_gauntlet_intellect.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -231,7 +268,6 @@ public class TierActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         et_gauntlet_discipline.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -239,7 +275,6 @@ public class TierActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         et_gauntlet_strength.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -247,7 +282,6 @@ public class TierActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         et_chest_intellect.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -255,7 +289,6 @@ public class TierActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         et_chest_discipline.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -263,7 +296,6 @@ public class TierActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         et_chest_strength.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -271,7 +303,6 @@ public class TierActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         et_legs_intellect.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -279,7 +310,6 @@ public class TierActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         et_legs_discipline.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -287,7 +317,6 @@ public class TierActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         et_legs_strength.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -295,7 +324,6 @@ public class TierActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         et_class_intellect.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -303,7 +331,6 @@ public class TierActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         et_class_discipline.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -311,7 +338,6 @@ public class TierActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         et_class_strength.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -319,7 +345,6 @@ public class TierActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         et_artifact_intellect.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -327,7 +352,6 @@ public class TierActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         et_artifact_discipline.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -335,7 +359,6 @@ public class TierActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         et_artifact_strength.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -343,7 +366,6 @@ public class TierActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         et_ghost_intellect.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -351,7 +373,6 @@ public class TierActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         et_ghost_discipline.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -359,7 +380,6 @@ public class TierActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         et_ghost_strength.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -476,12 +496,17 @@ public class TierActivity extends AppCompatActivity {
     } // END showMessage class
 
     public void upgradeHelm(View view) {
-        helm_intellect = Integer.parseInt(et_helm_intellect.getText().toString());
-        helm_discipline = Integer.parseInt(et_helm_discipline.getText().toString());
-        helm_strength = Integer.parseInt(et_helm_strength.getText().toString());
+        try {
+            helm_intellect = Integer.parseInt(et_helm_intellect.getText().toString());
+            helm_discipline = Integer.parseInt(et_helm_discipline.getText().toString());
+            helm_strength = Integer.parseInt(et_helm_strength.getText().toString());
+        } catch (NumberFormatException nfe) {
+            Toast.makeText(getApplicationContext(), "Invalid input, please enter value between 0 and 65", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Unspecified exception", Toast.LENGTH_SHORT).show();
+        }
 
         if (switch_helm.isChecked()) {
-            Toast.makeText(getApplicationContext(), "HELM UPGRADED!", Toast.LENGTH_SHORT).show();
             result = (helm_intellect + helm_discipline + helm_strength - HELM_BONUS) / HELM_MAX * 100;
         } else {
             result = (helm_intellect + helm_discipline + helm_strength) / HELM_MAX * 100;
@@ -504,12 +529,17 @@ public class TierActivity extends AppCompatActivity {
     } // END upgradeHelm class
 
     public void upgradeGauntlet(View view) {
-        gauntlet_intellect = Integer.parseInt(et_gauntlet_intellect.getText().toString());
-        gauntlet_discipline = Integer.parseInt(et_gauntlet_discipline.getText().toString());
-        gauntlet_strength = Integer.parseInt(et_gauntlet_strength.getText().toString());
-
+        try {
+            gauntlet_intellect = Integer.parseInt(et_gauntlet_intellect.getText().toString());
+            gauntlet_discipline = Integer.parseInt(et_gauntlet_discipline.getText().toString());
+            gauntlet_strength = Integer.parseInt(et_gauntlet_strength.getText().toString());
+        } catch (NumberFormatException nfe) {
+            Toast.makeText(getApplicationContext(), "Invalid input, please enter value between 0 and 58", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Unspecified exception", Toast.LENGTH_SHORT).show();
+        }
+        
         if (switch_gauntlet.isChecked()) {
-            Toast.makeText(getApplicationContext(), "GAUNTLET UPGRADED!", Toast.LENGTH_SHORT).show();
             result = (gauntlet_intellect + gauntlet_discipline + gauntlet_strength - GAUNTLET_BONUS) / GAUNTLET_MAX * 100;
         } else {
             result = (gauntlet_intellect + gauntlet_discipline + gauntlet_strength) / GAUNTLET_MAX * 100;
@@ -532,12 +562,17 @@ public class TierActivity extends AppCompatActivity {
     } // END upgradeGauntlet class
 
     public void upgradeChest(View view) {
-        chest_intellect = Integer.parseInt(et_chest_intellect.getText().toString());
-        chest_discipline = Integer.parseInt(et_chest_discipline.getText().toString());
-        chest_strength = Integer.parseInt(et_chest_strength.getText().toString());
+        try {
+            chest_intellect = Integer.parseInt(et_chest_intellect.getText().toString());
+            chest_discipline = Integer.parseInt(et_chest_discipline.getText().toString());
+            chest_strength = Integer.parseInt(et_chest_strength.getText().toString());
+        } catch (NumberFormatException nfe) {
+            Toast.makeText(getApplicationContext(), "Invalid input, please enter value between 0 and 86", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Unspecified exception", Toast.LENGTH_SHORT).show();
+        }
 
         if (switch_chest.isChecked()) {
-            Toast.makeText(getApplicationContext(), "CHEST UPGRADED!", Toast.LENGTH_SHORT).show();
             result = (chest_intellect + chest_discipline + chest_strength - CHEST_BONUS) / CHEST_MAX * 100;
         } else {
             result = (chest_intellect + chest_discipline + chest_strength) / CHEST_MAX * 100;
@@ -560,12 +595,17 @@ public class TierActivity extends AppCompatActivity {
     } // END upgradeChest class
 
     public void upgradeLegs(View view) {
-        legs_intellect = Integer.parseInt(et_legs_intellect.getText().toString());
-        legs_discipline = Integer.parseInt(et_legs_discipline.getText().toString());
-        legs_strength = Integer.parseInt(et_legs_strength.getText().toString());
+        try {
+            legs_intellect = Integer.parseInt(et_legs_intellect.getText().toString());
+            legs_discipline = Integer.parseInt(et_legs_discipline.getText().toString());
+            legs_strength = Integer.parseInt(et_legs_strength.getText().toString());
+        } catch (NumberFormatException nfe) {
+            Toast.makeText(getApplicationContext(), "Invalid input, please enter value between 0 and 79", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Unspecified exception", Toast.LENGTH_SHORT).show();
+        }
 
         if (switch_legs.isChecked()) {
-            Toast.makeText(getApplicationContext(), "LEGS UPGRADED!", Toast.LENGTH_SHORT).show();
             result = (legs_intellect + legs_discipline + legs_strength - LEGS_BONUS) / LEGS_MAX * 100;
         } else {
             result = (legs_intellect + legs_discipline + legs_strength) / LEGS_MAX * 100;
@@ -588,12 +628,17 @@ public class TierActivity extends AppCompatActivity {
     } // END upgradeLegs class
 
     public void upgradeClassItem(View view) {
-        class_intellect = Integer.parseInt(et_class_intellect.getText().toString());
-        class_discipline = Integer.parseInt(et_class_discipline.getText().toString());
-        class_strength = Integer.parseInt(et_class_strength.getText().toString());
+        try {
+            class_intellect = Integer.parseInt(et_class_intellect.getText().toString());
+            class_discipline = Integer.parseInt(et_class_discipline.getText().toString());
+            class_strength = Integer.parseInt(et_class_strength.getText().toString());
+        } catch (NumberFormatException nfe) {
+            Toast.makeText(getApplicationContext(), "Invalid input, please enter value between 0 and 35", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Unspecified exception", Toast.LENGTH_SHORT).show();
+        }
 
         if (switch_classItem.isChecked()) {
-            Toast.makeText(getApplicationContext(), "CLASS ITEM UPGRADED!", Toast.LENGTH_SHORT).show();
             result = (class_intellect + class_discipline + class_strength - CLASS_BONUS) / CLASS_MAX * 100;
         } else {
             result = (class_intellect + class_discipline + class_strength) / CLASS_MAX * 100;
@@ -616,12 +661,17 @@ public class TierActivity extends AppCompatActivity {
     } // END upgradeClassItem class
 
     public void upgradeArtifact(View view) {
-        artifact_intellect = Integer.parseInt(et_artifact_intellect.getText().toString());
-        artifact_discipline = Integer.parseInt(et_artifact_discipline.getText().toString());
-        artifact_strength = Integer.parseInt(et_artifact_strength.getText().toString());
+        try {
+            artifact_intellect = Integer.parseInt(et_artifact_intellect.getText().toString());
+            artifact_discipline = Integer.parseInt(et_artifact_discipline.getText().toString());
+            artifact_strength = Integer.parseInt(et_artifact_strength.getText().toString());
+        } catch (NumberFormatException nfe) {
+            Toast.makeText(getApplicationContext(), "Invalid input, please enter value between 0 and 80", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Unspecified exception", Toast.LENGTH_SHORT).show();
+        }
 
         if (switch_artifact.isChecked()) {
-            Toast.makeText(getApplicationContext(), "ARTIFACT UPGRADED!", Toast.LENGTH_SHORT).show();
             result = (artifact_intellect + artifact_discipline + artifact_strength - ARTIFACT_BONUS) / ARTIFACT_MAX * 100;
         } else {
             result = (artifact_intellect + artifact_discipline + artifact_strength) / ARTIFACT_MAX * 100;
@@ -644,12 +694,17 @@ public class TierActivity extends AppCompatActivity {
     } // END upgradeArtifact class
 
     public void upgradeGhost(View view) {
-        ghost_intellect = Integer.parseInt(et_ghost_intellect.getText().toString());
-        ghost_discipline = Integer.parseInt(et_ghost_discipline.getText().toString());
-        ghost_strength = Integer.parseInt(et_ghost_strength.getText().toString());
+        try {
+            ghost_intellect = Integer.parseInt(et_ghost_intellect.getText().toString());
+            ghost_discipline = Integer.parseInt(et_ghost_discipline.getText().toString());
+            ghost_strength = Integer.parseInt(et_ghost_strength.getText().toString());
+        } catch (NumberFormatException nfe) {
+            Toast.makeText(getApplicationContext(), "Invalid input, please enter value between 0 and 35", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Unspecified exception", Toast.LENGTH_SHORT).show();
+        }
 
         if (switch_ghost.isChecked()) {
-            Toast.makeText(getApplicationContext(), "GHOST UPGRADED!", Toast.LENGTH_SHORT).show();
             result = (ghost_intellect + ghost_discipline + ghost_strength - GHOST_BONUS) / GHOST_MAX * 100;
         } else {
             result = (ghost_intellect + ghost_discipline + ghost_strength) / GHOST_MAX * 100;
